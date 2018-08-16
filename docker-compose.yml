@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  http-knocking:
+    image: nwtgck/http-knocking:v0.1.0
+    ports:
+      - '8080:6767'
+    depends_on:
+      - trans
+    restart: always
+    command: --port=6767 --target-url=http://trans --open-knocking="/alpha,/foxtrot,/lima"
+
+  trans:
+    image: nwtgck/trans-server-akka:v1.17.0
+    restart: always
+    expose:
+      - "80"
+    volumes:
+      - ./docker_volumes/trans-db:/trans/db
