@@ -1,13 +1,13 @@
 version: '3.1'
 services:
   http-knocking:
-    image: nwtgck/http-knocking:v0.2.0
+    image: nwtgck/http-knocking:v0.7.0
     ports:
       - '8080:6767'
     depends_on:
       - trans
     restart: always
-    command: --port=6767 --target-url=http://trans --open-knocking="/alpha,/foxtrot,/lima" --auto-close-millis=30000 --open-knocking-max-interval-millis=60000
+    command: --port=6767 --target-host=trans --target-port=80 --open-knocking="/alpha,/foxtrot,/lima" --auto-close-millis=30000 --open-knocking-max-interval-millis=60000
 
   trans:
     image: nwtgck/trans-server-akka:v1.17.0
